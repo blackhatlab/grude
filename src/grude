@@ -32,7 +32,7 @@ for i in dic:
         hx = hashlib.sha256 (pwd)
     elif op.th == 'sha384':
         hx = hashlib.sha384 (pwd)
-    elif op.th == '512':
+    elif op.th == 'sha512':
         hx = hashlib.sha512 (pwd)
     pr = hx.hexdigest ()
     if pr == op.sh:
