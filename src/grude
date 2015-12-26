@@ -1,0 +1,42 @@
+#!/usr/bin/python
+
+import hashlib
+import optparse
+
+print '='*50
+print ' '*10 + 'Developer: DOCTOR_RABB' + ' '*10
+print ' '*10 + 'Version: 0.15' + ' '*10
+print '='*50
+
+op = optparse.OptionParser ('--hash <hash> -d <dictionary> --hash-type <hash type>')
+op.add_option ('--hash', dest='sh', type='string')
+op.add_option ('-d', dest='dic', type='string')
+op.add_option ('--hash-type', dest='th', type='string')
+(op, args) = op.parse_args ()
+
+try:
+   dic = open (op.dic, 'r')
+except:
+   print 'Hash file or dictionary invalid!'
+   exit ()
+
+for i in dic:
+    pwd = i.strip ('\n')
+    if op.th == 'md5':
+        hx = hashlib.md5 (pwd)
+    elif op.th == 'sha1':
+        hx = hashlib.sha1 (pwd)
+    elif op.th == 'sha224':
+        hx = hashlib.sha224 (pwd)
+    elif op.th == 'sha256':
+        hx = hashlib.sha256 (pwd)
+    elif op.th == 'sha384':
+        hx = hashlib.sha384 (pwd)
+    elif op.th == '512':
+        hx = hashlib.sha512 (pwd)
+    pr = hx.hexdigest ()
+    if pr == op.sh:
+       print '[+] Content: ' + pwd + '\nHash type: ' + op.th
+       exit ()
+    else:
+       print '[-] Word ' + pwd + ' incorrect :('
